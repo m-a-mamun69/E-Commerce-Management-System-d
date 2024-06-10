@@ -3,7 +3,6 @@ class Cart():
     def __init__(self, request):
         self.session = request.session
 
-        self.request = request
 
         # Get the current session key if it exists
         cart = self.session.get('session_key')
@@ -15,13 +14,13 @@ class Cart():
         # Make sure cart is available on all page of site
         self.cart = cart
 
-def add(self, product):
-    product_id = str(product.id)
+    def add(self, product):
+        product_id = str(product.id)
 
-    # Logic
-    if product_id in self.cart:
-        pass
-    else:
-        self.cart[product_id] = {'price': str(product.price)}
+        # Logic
+        if product_id in self.cart:
+            pass
+        else:
+            self.cart[product_id] = {'price': str(product.price)}
 
-    self.session.modified = True
+        self.session.modified = True
