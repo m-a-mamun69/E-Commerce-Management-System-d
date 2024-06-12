@@ -48,10 +48,12 @@ class Cart():
         product_id = str(product)
         product_qty = int(quantity)
 
-        # Get Cart
+		# Get cart
         ourcart = self.cart
-        # Update Dictionary/ Cart
+		# Update Dictionary/cart
         ourcart[product_id] = product_qty
+        
         self.session.modified = True
+
         thing = self.cart
         return thing
