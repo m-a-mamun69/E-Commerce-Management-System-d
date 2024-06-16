@@ -11,6 +11,14 @@ from django import forms
 # Create your views here.
 
 
+def search(request):
+    # Determine if they filled out the from
+    if request.method == "POST":
+        searched = request.POST['searched']
+        return render(request, 'search.html', {'searched':searched})
+    else:
+        return render(request, 'search.html', {})
+
 def update_info(request):
     if request.user.is_authenticated:
         current_user = Profile.objects.get(user__id=request.user.id)
