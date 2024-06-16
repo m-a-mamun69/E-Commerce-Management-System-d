@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 from django import forms
+from django.db.models import Q
 
 
 # Create your views here.
@@ -16,7 +17,7 @@ def search(request):
     if request.method == "POST":
         searched = request.POST['searched']
         # Query The Products DB Model
-        searched = Product.objects.filter(name__icontains=searched)
+        searched = Product.objects.filter(Q(name__icontains=searched) | Q(description__icontains=searched))
         # Test For Null
         if not searched:
             messages.success(request, ("That Product Does Not Exist...Please try Again."))
