@@ -15,7 +15,14 @@ def search(request):
     # Determine if they filled out the from
     if request.method == "POST":
         searched = request.POST['searched']
-        return render(request, 'search.html', {'searched':searched})
+        # Query The Products DB Model
+        searched = Product.objects.filter(name__icontains=searched)
+        # Test For Null
+        if not searched:
+            messages.success(request, ("That Product Does Not Exist...Please try Again."))
+            return render(request, 'search.html', {})
+        else:
+            return render(request, 'search.html', {'searched':searched})
     else:
         return render(request, 'search.html', {})
 
