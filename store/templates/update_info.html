@@ -10,17 +10,24 @@
         </div>
     </div>
 </header>
-</br></br>
+</br>
 
 <div class="container"> 
     <div class="row"> 
 
-            <div class="col-md-6 offset-md-3"> 
+            <div class="col-md-6 offset-md-3">
+                <br>
+                <strong>Billing Information</strong> 
+                <br><br>
                 <form method="POST" action="{% url 'update_info' %}">
                     {% csrf_token %}
 
                     {{ form.as_p }}
-                    </br></br>
+                    </br>
+                    <strong>Shipping Information</strong>
+                    <br><br>
+                    {{ shipping_form.as_p }}
+                    <br>
                     <button type="submit" class="btn btn-secondary">Update Profile</button>
                     <br><br>
 
