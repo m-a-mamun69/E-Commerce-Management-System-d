@@ -5,6 +5,26 @@ from payment.models import ShippingAddress
 from django.contrib import messages
 # Create your views here.
 
+def process_order(request):
+    if request.POST:
+        # Get Billing Info from the last page
+        payment_form = PaymentForm(request.POST or None)
+        # Get Shipping Session Data
+        my_shipping = request.session.get('my_shipping')
+
+        # Create Shipping Address From session Info
+        shipping_address = f"{my_shipping['shipping_address1']}\n{my_shipping['shipping_address2']}\n{my_shipping['shipping_city']}\n{my_shipping['shipping_state']}\n{my_shipping['shipping_zipcode']}\n{my_shipping['shipping_country']}"
+        print(shipping_address)
+
+        messages.success(request, "Order Placed!")
+        return redirect('home')
+
+
+    else:
+        messages.success(request, "Access Denied!")
+        return redirect('home')
+
+
 def billing_info(request):
     if request.POST:
         #Get the Cart
@@ -12,6 +32,10 @@ def billing_info(request):
         cart_products = cart.get_prods
         quantities = cart.get_quants
         totals = cart.cart_total()
+
+        # Create a Session with Shipping Info
+        my_shipping = request.POST
+        request.session['my_shipping'] = my_shipping
 
         # Check to see if user is logged In
         if request.user.is_authenticated:
