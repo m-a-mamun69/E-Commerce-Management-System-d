@@ -50,10 +50,26 @@
                         <h5 class="card-header">Shipping Info</h5>
                         <div class="card-body">
 
-                                {{ shipping_info }}
+                                Name: {{ shipping_info.shipping_full_name }} <br>
+                                Email: {{ shipping_info.shipping_email }} <br>
+                                Address 1: {{ shipping_info.shipping_address1 }} <br>
+                                Address 2: {{ shipping_info.shipping_address2 }} <br>
+                                City: {{ shipping_info.shipping_city }} <br>
+                                State: {{ shipping_info.shipping_state }} <br>
+                                ZipCode: {{ shipping_info.shipping_zipcode }} <br>
+                                Country: {{ shipping_info.shipping_country }} <br><br>
+                                <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">Update Shipping</a>
 
                         </div>
-                      </div><br>
+                        </div>
+                        <br><br>
+                        <div class="card">
+                            <h5 class="card-header">Billing Info</h5>
+                            <div class="card-body">
+                                {{ billing_form.as_p }}
+                            </div>
+                            </div><br>
+
                       <a href="#" class="btn btn-secondary">Pay Now</a>
                     <br>
                 </div>
