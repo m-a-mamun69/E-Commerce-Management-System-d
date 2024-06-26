@@ -15,6 +15,23 @@ def orders(request, pk):
         # Get the Order Items
         items = OrderItem.objects.filter(order=pk)
 
+        if request.POST:
+            status = request.POST['shipping_status']
+            # Check if true or false
+            if status == "true":
+                # Get the order
+                order = Order.objects.filter(id=pk)
+                # Update the status
+                order.update(shipped=True)
+            else:
+                # Get the order
+                order = Order.objects.filter(id=pk)
+                # Update the status
+                order.update(shipped=False)
+            
+            messages.success(request, "Shipping Status Updated!")
+            return redirect('home')
+
         return render(request, 'payment/orders.html', {"order":order, "items":items})
 
     else:
