@@ -5,6 +5,7 @@ from payment.models import ShippingAddress, Order, OrderItem
 from django.contrib.auth.models import User
 from django.contrib import messages
 from store.models import Product
+import datetime
 # Create your views here.
 
 
@@ -22,7 +23,8 @@ def orders(request, pk):
                 # Get the order
                 order = Order.objects.filter(id=pk)
                 # Update the status
-                order.update(shipped=True)
+                now = datetime.datetime.now()
+                order.update(shipped=True, date_shipped=now)
             else:
                 # Get the order
                 order = Order.objects.filter(id=pk)
@@ -41,6 +43,17 @@ def orders(request, pk):
 def not_shipped_dash(request):
     if request.user.is_authenticated and request.user.is_superuser:
         orders = Order.objects.filter(shipped=False)
+        
+        if request.POST:
+            status = request.POST['shipping_status']
+            num = request.POST['num']
+            # Grab the Order
+            order = Order.objects.filter(id=num)
+            # Grab Date and time
+            now = datetime.datetime.now()
+            order.update(shipped=True, date_shipped=now)
+            messages.success(request, "Shipping Status Updated!")
+            return redirect('home')
 
         return render(request, 'payment/not_shipped_dash.html', {"orders":orders})
     else:
@@ -51,6 +64,17 @@ def not_shipped_dash(request):
 def shipped_dash(request):
     if request.user.is_authenticated and request.user.is_superuser:
         orders = Order.objects.filter(shipped=True)
+
+        if request.POST:
+            status = request.POST['shipping_status']
+            num = request.POST['num']
+            # Grab the Order
+            order = Order.objects.filter(id=num)
+            # Grab Date and time
+            now = datetime.datetime.now()
+            order.update(shipped=False)
+            messages.success(request, "Shipping Status Updated!")
+            return redirect('home')
 
         return render(request, 'payment/shipped_dash.html', {"orders":orders})
     else:
