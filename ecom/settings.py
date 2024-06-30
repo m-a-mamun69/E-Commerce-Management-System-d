@@ -12,13 +12,13 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-#from dotenv import load_dotenv
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load our environmental variables
-#load_dotenv()
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-cm2pm^1(d_cw@l@e)0a1)q()9(i5e!vo2m#je^$zvkza45l6e_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["django-ecommerce-production-bb09.up.railway.app", "https://django-ecommerce-production-bb09.up.railway.app"]
+ALLOWED_HOSTS = ["django-ecommerce-production-bb09.up.railway.app", "*"]
 CSRF_TRUSTED_ORIGINS = ["https://django-ecommerce-production-bb09.up.railway.app"]
 
 
