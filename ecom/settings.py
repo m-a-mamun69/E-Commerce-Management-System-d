@@ -30,10 +30,9 @@ DB_PASSWORD_YO = os.environ['DB_PASSWORD_YO']
 SECRET_KEY = 'django-insecure-cm2pm^1(d_cw@l@e)0a1)q()9(i5e!vo2m#je^$zvkza45l6e_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['django-ecommerce-production-bb09.up.railway.app', 'https://django-ecommerce-production-bb09.up.railway.app']
-CSRF_TRUSTED_ORIGINS = [ 'https://django-ecommerce-production-bb09.up.railway.app' ]
+ALLOWED_HOSTS = []
 
 # 'localhost', '127.0.0.1',
 # Application definition
@@ -48,12 +47,11 @@ INSTALLED_APPS = [
     'store',
     'cart',
     'payment',
-    'whitenoise.runserver_nostatic',
+
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -142,8 +140,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = ['static/']
 
 # White Noise static stuff
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
